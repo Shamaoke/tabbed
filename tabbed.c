@@ -317,6 +317,7 @@ drawbar(void)
 	XftColor *col;
 	int c, cc, fc, width;
 	char *name = NULL;
+        char tabtitle[256]; // edit
 
 	if (nclients == 0) {
 		dc.x = 0;
@@ -358,7 +359,18 @@ drawbar(void)
 		} else {
 			col = clients[c]->urgent ? dc.urg : dc.norm;
 		}
-		drawtext(clients[c]->name, col);
+                // edit {{{
+                snprintf(tabtitle,
+                         sizeof(tabtitle),
+                         "%s%d%s%s",
+                         num_before,
+                         c + 1,
+                         num_after,
+                         clients[c]->name);
+
+                drawtext(tabtitle, col);
+		// drawtext(clients[c]->name, col); // edit
+                // }}}
 		dc.x += dc.w;
 		clients[c]->tabx = dc.x;
 	}
@@ -975,7 +987,10 @@ setup(void)
 	screen = DefaultScreen(dpy);
 	root = RootWindow(dpy, screen);
 	initfont(font);
-	bh = dc.h = dc.font.height + 2;
+        // edit {{{
+        bh = dc.h = dc.font.height + padding;
+	// bh = dc.h = dc.font.height + 2;
+        // }}}
 
 	/* init atoms */
 	wmatom[WMDelete] = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
