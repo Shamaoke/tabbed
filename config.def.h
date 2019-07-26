@@ -45,8 +45,11 @@ static       int   padding      = 6; // with the font "Noto Sans CJK JP:pixelsiz
  * is False, then newposition is an absolute position.
  */
 // static int  newposition   = 0;
-static int  newposition  = -1;
-static Bool npisrelative = False;
+// static int  newposition  = -1;
+// static Bool npisrelative = False;
+
+static int  newposition  = 1;
+static Bool npisrelative = True;
 
 #define SETPROP(p) { \
         .v = (char *[]){ "/bin/sh", "-c", \
